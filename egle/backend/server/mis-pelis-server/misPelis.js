@@ -4,7 +4,6 @@ import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
 
 dotenv.config();
 
-const app = express();
 app.use(express.json()); // ¡Importante! Para poder leer el Body de Postman
 const PORT = 3002;
 
@@ -28,7 +27,7 @@ async function conectarDB() {
 }
 
 // 1. Ver todos las peliculas (GET)
-app.get('/peliculas', async (req, res) => {
+app.get('/peliculas', express.json(), async (req, res) => {
     try {
         const listaPeliculas = await PelisColeccion.find({}).toArray();
         res.json({ success: true, data: listaPeliculas });
