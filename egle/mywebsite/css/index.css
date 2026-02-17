@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+/*RESET*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%
+}
+
+ul,
+pl,
+li {
+    list-style: none;
+
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/*END OF RESET*/
+
+:root {
+
+    /*FONTS*/
+    --f-heading-xl: normal 4em 'Hedvig Letters Serif', serif;
+    --f-heading-lg: normal 2em 'Hedvig Letters Serif', serif;
+    --f-heading-md: normal 1.5em 'Hedvig Letters Serif', serif;
+    --f-heading-sm: 500 1.1875em 'Instrument Sans', sans-serif;
+    --f-body: normal .9375em 'Instrument Sans', sans-serif;
+    --f-link: 500 .9375em 'Instrument Sans', sans-serif;
+
+    /*COLORS*/
+
+    --c-text: #213C51;
+    --c-light: #6594B1;
+    --c-primary: #DDAED3;
+    --c-secondary: #EEEEEE;
+
+
+    /*SPACING*/
+
+    --s-xl: 4rem;
+    --s-lg: 3rem;
+    --s-md: 2rem;
+    --s-sm: 1rem;
+    --s-xs: .5rem;
+
+    /*sIZES*/
+
+    --mw-lg: 60.25rem;
+
+    /*RADIUS*/
+
+    --r-xl: 6rem;
+    --r-sm: .3125rem;
+
+
+}
+
+
+/*------------------*/
+
+/*ElEMENTS*/
+
+.text--xl {
+    font: var(--f-heading-xl);
+}
+
+.text--lg {
+    font: var(--f-heading-lg);
+}
+
+.text--md {
+    font: var(--f-heading-md);
+    color: var(--c-primary);
+}
+
+.text--sm {
+    font: var(--f-heading-sm);
+}
+
+.body,
+p {
+    font: var(--f-body);
+}
+
+.link {
+    font: var(--f-link);
+}
+
+
+
+.btn {
+    font: var(--f-link);
+    background-color: var(--c-text);
+    color: var(--c-light);
+    padding: var(--s-xs) var(--s-md);
+    border-radius: var(--r-xl);
+    display: inline-block;
+
+    transition: all 0.4s ease;
+    transform-origin: center;
+
+
+
+
+    &:hover {
+        transform: scale(0.9);
+        opacity: 0.7;
+
+    }
+
+}
+
+.btn--light {
+    background-color: var(--c-light);
+    color: var(--c-text);
+}
+
+.btn--black {
+    background-color: var(--c-text);
+    color: var(--c-light);
+}
+
+.btn--primary {
+    background-color: var(--c-primary);
+    color: var(--c-light);
+    font-size: var(--f-link);
+}
+
+/*END OF ElEMENTS*/
+
+/*HEADER*/
+
+header {
+    color: var(--c-secondary);
+    text-shadow: #474747 3px 5px 2px;
+    padding: 0 var(--s-xs);
+
+    &.header__container {
+        background: url(../assests/banner.webp) no-repeat center center/cover;
+        min-height: 80vh;
+        border-radius: var(--r-sm);
+
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        &.header__block {
+            display: flex;
+            flex-direction: column;
+            padding: var(--s-sm);
+            gap: var(--s-sm);
+            align-items: center;
+            width: 100%;
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+/*END OF HEADER*/
+
+
+/*SECTION INFO*/
+.info__container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--s-xs);
+
+    & .info__block {
+        width: min(75rem, 100%);
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+        gap: 2rem;
+        align-items: start;
+
+
+        & .about-me,
+        & .my-abilities,
+        & .my-passions {
+            background: #f4f4f4;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: justify;
+            border-radius: var(--r-sm);
+
+            & i {
+                font-size: 3em;
+
+            }
+
+            & .hidden-info {
+                max-height: 0;
+                opacity: 0;
+                transition: max-height 0.4s ease, opacity 0.3s ease;
+            }
+
+            &:hover .hidden-info {
+                max-height: 300px;
+                opacity: 1;
+                margin-top: 1rem;
+            }
+        }
+
+    }
+}
+
+/*END OF SECTION INFO*/
+
+/*FOOTER*/
+
+footer {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--s-md), 0;
+
+    & .social-network___block {
+
+        display: flex;
+        flex-direction: row;
+        gap: var(--s-sm);
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+       &  a {
+            cursor: pointer
+
+        }
+
+         & i {
+                font-size: 1.5em;
+                color: var(--c-light);
+
+            }
+
+       
+    }
+}
+
+
+
+/*END OF FOOTER*/
