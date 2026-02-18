@@ -28,9 +28,12 @@ app.get('/pets', async (req, res) => {
     const database = client.db("Paw_Patrol")
     const petsColeccion = database.collection("Pets")
     const list = await petsColeccion.find({}).toArray();
-    res.json({success: true, data: list})
+    res.json({success: true, 
+        message: "Lista de mascotas recuperada 🐶🐱",
+        data: list})
     } catch (error) {
-        res.status(500).json({success: false, error: error.message })
+        res.status(500).json({success: false, 
+             error: `Error en el cuartel Paw Patrol: 🚨 ${error.message}` })
     }finally{
         await client.close();
     }
@@ -66,7 +69,7 @@ app.put('/pets/:id', express.json(), async (req, res)=> {
         );
         
         if(result.matchedCount === 0){
-            res.status(404).json({sucess: false, message: "Mascota no encontrada, ingrese otra"})
+            res.status(404).json({sucess: false, message: "Mascota 🐶 no encontrada, ingrese otra"})
         }else{
             res.json({success: true, message: "Se actualizo la base de datos", modifiedCount: result.modifiedCount})
         }
@@ -93,9 +96,9 @@ app.delete('/pets/:id', async(req, res) => {
     })
 
     if (result.deletedCount === 0) {
-        res.status(404).json({success: true, message: "Mascota no encontrada, ingrese otra"})
+        res.status(404).json({success: true, message: "Mascota 🐶 no encontrada, ingrese otra"})
     }else{
-        res.json({ success: true, message: "Mascota eliminada en la base de datos ojo!", deletedCount: result.deletedCount})
+        res.json({ success: true, message: "Mascota eliminada en la base de datos alerta 🚨!", deletedCount: result.deletedCount})
     }
    } catch (error) {
     res.status(500).json({success: false, error: error.message })
