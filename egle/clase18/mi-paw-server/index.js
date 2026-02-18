@@ -22,12 +22,12 @@ const client = new MongoClient(uri, {
 
 // GET - OBTENER DATOS
 
-app.get('/posts', async (req, res) => {
+app.get('/pets', async (req, res) => {
     try {
         await client.connect();
     const database = client.db("Paw_Patrol")
-    const posts = database.collection("Pets")
-    const list = await posts.find({}).toArray();
+    const petsColeccion = database.collection("Pets")
+    const list = await petsColeccion.find({}).toArray();
     res.json({success: true, data: list})
     } catch (error) {
         res.status(500).json({success: false, error: error.message })
@@ -38,12 +38,12 @@ app.get('/posts', async (req, res) => {
 
 // POST - CREAR DATOS
 
-app.post('/post', express.json(), async (req, res) =>{
+app.post('/pets', express.json(), async (req, res) =>{
     try {
         await client.connect();
         const database = client.db("Paw_Patrol")
-        const posts = database.collection("Pets")
-        const result = await posts.insertOne(req.body)
+        const petsColeccion = database.collection("Pets")
+        const result = await petsColeccion.insertOne(req.body)
         res.json({success: true, insertedId: result.insertedId})
     } catch (error) {
         res.status(500).json({success: false, error: error.message})
@@ -58,9 +58,9 @@ app.put('/post/:id', express.json(), async (req, res)=> {
     try {
         await client.connect();
         const database = client.db("Paw_Patrol");
-        const posts = database.collection("Pets");
+        const petsColeccion = database.collection("Pets");
 
-        const result = await posts.updateOne(
+        const result = await petsColeccion.updateOne(
             { _id: new ObjectId(req.params.id)},
             { $set: req.body }
         );
@@ -82,13 +82,13 @@ app.put('/post/:id', express.json(), async (req, res)=> {
 
 // DELETE - ELIMINAR DATOS
 
-app.delete('/post/:id', async(req, res) => {
+app.delete('/pets/:id', async(req, res) => {
    try {
      await client.connect();
     const database = client.db("Paw_Patrol");
-    const posts = database.collection("Pets");
+    const petsColeccion = database.collection("Pets");
 
-    const result = await posts.deleteOne({
+    const result = await petsColeccion.deleteOne({
         _id: new ObjectId(req.params.id)
     })
 
