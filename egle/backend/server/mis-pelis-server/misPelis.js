@@ -1,3 +1,6 @@
+import { setServers } from "node:dns/promises";
+setServers(["1.1.1.1", "8.8.8.8"]);
+
 import dotenv from 'dotenv';
 import express from 'express';
 import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
@@ -27,7 +30,7 @@ async function conectarDB() {
     }
 }
 
-// 1. Ver todos las peliculas (GET)
+// 1. Ver todos las peliculas (GET)// endpoint de GET para obtener datos
 app.get('/peliculas', async (req, res) => {
     try {
         const listaPeliculas = await PelisColeccion.find({}).toArray();
@@ -52,6 +55,49 @@ app.post('/peliculas', async (req, res) => {
         res.status(201).json({ success: true, _id: resultado.insertedId, ...nuevaPelicula });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
+    }
+});
+// 3. Actualizar una pelicula (PUT)
+
+app.put('/peliculas/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { titulo, director, estreno, genero } = req.body;
+
+        if (!titulo || !director) {
+            return res.status(400).json({ success: false, message: "Faltan datos obligatorios." });
+        }
+
+        const resultado = await PelisColeccion.updateOne(
+            { _id: new ObjectId(id.trim()) },
+            { $set: { titulo, director, estreno, genero } }
+        );
+
+        if (resultado.matchedCount === 0) {
+            return res.status(404).json({ success: false, message: "No se encontró la película." });
+        }
+
+        res.json({ success: true, message: "Película actualizada correctamente." });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+
+
+// Borrar una pelicula (DELETE)
+app.delete('/peliculas/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const resultado = await PelisColeccion.deleteOne({ _id: new ObjectId(id.trim()) });
+
+        if (resultado.deletedCount === 0) {
+            return res.status(404).json({ success: false, message: "No se encontró la película." });
+        }
+
+        res.json({ success: true, message: "Película eliminada correctamente." });
+    } catch (error) {
+        res.status(400).json({ success: false, message: "El formato del ID no es válido." });
     }
 });
 
