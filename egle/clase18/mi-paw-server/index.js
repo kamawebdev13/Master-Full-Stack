@@ -54,7 +54,7 @@ app.post('/pets', express.json(), async (req, res) =>{
 
 // UPDATE - ACTUALIZAR DATOS
 
-app.put('/post/:id', express.json(), async (req, res)=> {
+app.put('/pets/:id', express.json(), async (req, res)=> {
     try {
         await client.connect();
         const database = client.db("Paw_Patrol");
