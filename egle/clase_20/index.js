@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 const PORT = 3001;
-const DB_NAME = 'SistemaCine';
+const DB_NAME = 'sistemaCine';
 
 const uri = process.env.MONGODB_URI
 
